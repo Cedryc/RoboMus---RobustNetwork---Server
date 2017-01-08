@@ -196,8 +196,6 @@ public class ServerEx {
                     case "handshake":
                         //create a contact with the values sent inside the message
                         Contact robot = new Contact((String)L.get(0), (String)L.get(3), (String)L.get(4), (int)L.get(5), synchThreshold);
-                        // sends a test message ton confirm the robot that the connection was established
-                        synchNTest.TstSender(robot);
                         // set up the booleans used to describe a robot's state
                         robot.firstTime = true; // if firstTime is true, a different synch message with additionnal infos will be sent to the robot
                         robot.hasMaster = false; // hasMaster is true <=> the robot has lost connection with the server <=> the robot has a master
@@ -212,6 +210,7 @@ public class ServerEx {
                             for(Contact contact : contacts){
                                 if (contact.name.equals((String)L.get(0))){
                                     RobotIsIn = true;
+                                    contact.firstTime = true; // send additionnal infos and cause the robot to start his sycnh waiter
                                     System.out.println("I already know you");
                                     System.out.println("\n"); 
                                     break; 
@@ -314,8 +313,10 @@ public class ServerEx {
         while(true){
             int i = scan.nextInt();
             switch(i){
-                
-                //input 3 to start sending color messages torobots
+                case 1:
+                    server.ServerSender(contacts.get(0), "message to R", "hello");
+                    break;
+                //input 3 to start sending color messages to robots
                 case 3:
                     server.colorsSimulation.start();
                     System.out.println("start colors");

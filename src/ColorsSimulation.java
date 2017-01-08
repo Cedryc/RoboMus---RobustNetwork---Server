@@ -70,6 +70,12 @@ public class ColorsSimulation extends Thread {
         
     public void run(){  
         
+        try { //wait a bit before starting the messages
+            Thread.sleep(200);
+            } catch (InterruptedException ex) {
+            Logger.getLogger(ColorsSimulation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         // set the origin time at the currenttime value when the simulation is launched        
         originTime = System.currentTimeMillis();
         k = 0;
@@ -91,6 +97,7 @@ public class ColorsSimulation extends Thread {
                 
                 // tells every contacts to play "blue" 500ms after the message is sent
                 ColorsSender(contact, System.currentTimeMillis()+ 500 , "blue");
+                System.out.println("blue sent");
             }
             
             try {  //tells the server to wait noteInterval millisecs before sending the next message

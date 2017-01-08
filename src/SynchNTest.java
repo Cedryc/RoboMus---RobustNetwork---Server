@@ -57,7 +57,7 @@ public class SynchNTest extends TimerTask{
         // if it is a robot's first synch, a "synch start" message is sent
         // synch start messages additionnaly communicates the synchInterval and synchthreshold values to the robot
         if(contact.firstTime){
-            args.add("synch start");       
+            args.add("synch start");      // synch start will make the robot start his buffer  
             args.add(System.currentTimeMillis());
             args.add(synchInterval);
             args.add(contact.threshold); // the threshold is currently the same for every robot
